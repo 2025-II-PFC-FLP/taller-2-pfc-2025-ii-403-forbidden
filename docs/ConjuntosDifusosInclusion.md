@@ -106,9 +106,13 @@ else aux(i + 1)
   
 
 ## Representación matemática
+
+
 $$
 A \subseteq B \Leftrightarrow \forall x \in [0,1000],\ f_A(x) \le f_B(x)
 $$
+
+
 Si existe un $x$ donde $f_A(x) > f_B(x)$, entonces $A \nsubseteq B$.
 
 ---
@@ -125,9 +129,13 @@ val  cd2: cj.ConjDifuso = x => if (x < 10) 0.4  else  0.7
 * Para $x < 10$: $f_{A}(x) = 0.2 \le 0.4 = f_{B}(x)$
 
 * Para $x \ge 10$: $f_{A}(x) = 0.5 \le 0.7 = f_{B}(x)$
+
+
 $$
 \Rightarrow A \subseteq B \text{ (resultado verdadero)}
 $$
+
+
 ---
 ## **Llamados de pila en recursión**
 ### Paso 1: Inicialización
@@ -185,10 +193,15 @@ sequenceDiagram
 * Cada llamada recursiva avanza una posición dentro del dominio $[0,1000]$.
 
 * La función se ejecuta en **tiempo lineal** respecto al tamaño del dominio:
+
+
 $$
 T(n) = O(n)
 $$
+
+
 donde $n = 1001$ elementos.
+
 * No se utilizan estructuras iterativas ni variables mutables.
 
 * La recursión es **de cola**, optimizada por el compilador.
