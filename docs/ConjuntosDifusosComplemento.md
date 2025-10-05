@@ -1,131 +1,143 @@
 
----
+# Informe de proceso Algoritmo Complemento
 
-# Informe de proceso Algoritmo Complemento en Conjuntos Difusos
+  
 
 ## Definición del Algoritmo
+
+  
 
 ```Scala
 package taller
 
-class ConjuntosDifusos {
-  type ConjDifuso = Int => Double
-
-  def complemento(c: ConjDifuso): ConjDifuso = {
-    elem => {
-      val grado = c(elem)
-      val complemento = 1.0 - grado
-      complemento
-    }
-  }
+class  ConjuntosDifusos {
+	type  ConjDifuso = Int => Double
+	def  complemento(c: ConjDifuso): ConjDifuso = {
+		elem => {
+		val  grado = c(elem)
+		val  complemento = 1.0 - grado
+		complemento
+		}
+	}
 }
 ```
 
-* El algoritmo **invierte el grado de pertenencia** de cada elemento dentro del conjunto difuso.
-* Se basa en la operación matemática ( f_{\neg A}(x) = 1 - f_A(x) ).
-* No utiliza bucles, mutabilidad ni estructuras iterativas.
-* Cada evaluación tiene **complejidad constante O(1)**.
+  
+
+El algoritmo **Complemento** en conjuntos difusos toma una función característica `c` que representa el grado de pertenencia de un elemento dentro del intervalo $[0, 1]$.
+
+Devuelve una nueva función que representa el **complemento difuso**, definido matemáticamente como:
+
+  
+
+$$
+f_{\neg S}(x) = 1 - f_S(x)
+$$
+
+  
 
 ---
+
+  
 
 ## Explicación paso a paso
 
-### Definición de operación
+  
 
-```Scala
-val grado = c(elem)
-val complemento = 1.0 - grado
-complemento
-```
+1.  **Entrada:** un conjunto difuso `c`, representado como una función `Int => Double`.
 
-* Se toma el grado de pertenencia del elemento `elem` aplicando la función `c`.
-* Se calcula su complemento restando el valor obtenido de 1.
-* El resultado es el nuevo grado de pertenencia del elemento en el conjunto complementario.
+2.  **Operación:** para cada elemento entero del universo, se obtiene su grado de pertenencia `c(elem)`.
 
----
+3.  **Transformación:** se aplica la fórmula del complemento, restando el grado obtenido de 1.
 
-## Representación matemática
+4.  **Salida:** se devuelve una nueva función que representa el conjunto complementario.
 
-[
-f_{\neg A}(x) = 1 - f_A(x)
-]
+  
 
-donde:
+Ejemplo:
 
-* ( f_A(x) \in [0,1] ) es el grado de pertenencia original,
-* ( f_{\neg A}(x) \in [0,1] ) es el grado de pertenencia al complemento.
+Si $f_S(5) = 0.8$, entonces $f_{\neg S}(5) = 1 - 0.8 = 0.2$.
 
-**Ejemplo:**
-
-[
-f_A(4) = 0.8 \Rightarrow f_{\neg A}(4) = 1 - 0.8 = 0.2
-]
+  
 
 ---
 
-## Llamados de función
+  
 
-Ejemplo con un conjunto difuso definido como:
+## Llamados de pila en recursión
 
-```Scala
-val cj = new ConjuntosDifusos
-val c: cj.ConjDifuso = x => if (x < 5) 0.2 else 0.9
-val comp = cj.complemento(c)
-```
+  
 
-### Paso 1: Evaluación inicial
+El algoritmo **no utiliza recursión**, ya que trabaja directamente con una función anónima (`lambda`) aplicada a cada elemento del conjunto.
 
-* Para ( x = 2 ): ( f_A(2) = 0.2 )
-* Para ( x = 7 ): ( f_A(7) = 0.9 )
+Por tanto, no existe una pila de llamados significativa en este caso.
 
-### Paso 2: Aplicación de la función complemento
-
-[
-f_{\neg A}(2) = 1 - 0.2 = 0.8
-]
-[
-f_{\neg A}(7) = 1 - 0.9 = 0.1
-]
+  
 
 ---
+
+  
 
 ## Ejemplo de uso
 
-```Scala
-val cj = new ConjuntosDifusos
-val conjunto: cj.ConjDifuso = x => if (x <= 5) 0.3 else 0.7
-val complemento = cj.complemento(conjunto)
+  
 
-println(complemento(2))  // 0.7
-println(complemento(8))  // 0.3
+```Scala
+val  conjuntos = new  ConjuntosDifusos()
+// Definimos un conjunto difuso simple
+val  conjuntoEjemplo: conjuntos.ConjDifuso = x => if (x <= 5) 0.3  else  0.8
+// Calculamos su complemento
+val  complemento = conjuntos.complemento(conjuntoEjemplo)
+println(complemento(4)) // 1 - 0.3 = 0.7
+println(complemento(7)) // 1 - 0.8 = 0.2
 ```
 
-El resultado cumple que los grados de pertenencia se invierten de manera proporcional dentro del rango [0,1].
+  
+
+Resultado esperado:
+
+```
+0.7
+0.2
+```
+
+  
 
 ---
 
-## Diagrama de flujo del algoritmo
+  
+
+## Diagrama de llamados de pila
+
+  
 
 ```mermaid
-flowchart TD
-    A[Inicio] --> B[Recibir conjunto difuso c]
-    B --> C[Evaluar elemento x]
-    C --> D[Obtener grado = c(x)]
-    D --> E[Calcular complemento = 1 - grado]
-    E --> F[Retornar f¬A(x)]
-    F --> G[Fin]
+sequenceDiagram
+    participant Main as complemento(c)
+    participant Lambda as elem => ...
+    participant C as c(elem)
+
+    Main->>Lambda: Retorna función que recibe elem
+    Lambda->>C: Llama a c(elem)
+    C-->>Lambda: Retorna grado (Double)
+    Lambda->>Lambda: Calcula complemento (1.0 - grado)
+    Lambda-->>Main: Retorna complemento
 ```
 
+  
+
 ---
+
+  
 
 ## Análisis de complejidad
 
-El algoritmo evalúa una sola operación por elemento, por lo tanto:
+  
 
-[
-T(n) = O(1)
-]
+El algoritmo **Complemento** evalúa una sola operación aritmética por cada elemento del conjunto difuso, sin estructuras recursivas ni ciclos.
 
-No hay recursión ni estructuras iterativas, y la función es pura e inmutable.
-
----
+Por tanto, su complejidad temporal es:
+$$
+O(1)
+$$
+La complejidad espacial también es $O(1)$, ya que no se almacenan estructuras adicionales y solo se devuelve una nueva función.
