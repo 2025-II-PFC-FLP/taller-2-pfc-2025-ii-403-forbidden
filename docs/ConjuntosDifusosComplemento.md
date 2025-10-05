@@ -139,7 +139,7 @@ El algoritmo **Complemento** evalúa una sola operación aritmética por cada el
 Por tanto, su complejidad temporal es:
 
 $$
-O(1)
+T(n) = O(1)
 $$
 
-La complejidad espacial también es $O(1)$, ya que no se almacenan estructuras adicionales y solo se devuelve una nueva función.
+La complejidad espacial también es $T(n) = O(1)$, ya que no se almacenan estructuras adicionales y solo se devuelve una nueva función.
