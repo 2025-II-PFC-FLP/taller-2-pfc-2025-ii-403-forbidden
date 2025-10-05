@@ -137,7 +137,9 @@ sequenceDiagram
 El algoritmo **Complemento** evalúa una sola operación aritmética por cada elemento del conjunto difuso, sin estructuras recursivas ni ciclos.
 
 Por tanto, su complejidad temporal es:
+
 $$
 O(1)
 $$
+
 La complejidad espacial también es $O(1)$, ya que no se almacenan estructuras adicionales y solo se devuelve una nueva función.
