@@ -3,7 +3,6 @@ package taller
 import scala.annotation.tailrec
 
 class ConjuntosDifusos {
-
   type ConjDifuso = Int => Double
 
   def interseccion(cd1: ConjDifuso, cd2: ConjDifuso): ConjDifuso = {
