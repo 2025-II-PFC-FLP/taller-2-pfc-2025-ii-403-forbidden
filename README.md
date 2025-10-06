@@ -84,5 +84,3 @@ El proyecto se basa en las ideas de *Lotfi Zadeh (1965)* y aplica conceptos como
 * Implementa recursión y comparación por grados de pertenencia.
 
 ---
-
-¿Quieres que también te dé la sección de **👥 Integrantes del grupo** al final (con formato de tabla Markdown) para que la pegues directamente en el README?
