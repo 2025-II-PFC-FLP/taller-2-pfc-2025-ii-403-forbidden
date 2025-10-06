@@ -49,6 +49,8 @@ def igualdad(cd1: ConjDifuso, cd2: ConjDifuso): Boolean = {
 
 - Corte temprano: Si encuentra un elemento donde difieren, retorna false inmediatamente.
 
+---
+
 ## 3. Ejemplo paso a paso
    
 Definimos dos conjuntos difusos:
@@ -86,11 +88,14 @@ Ejecución de Igualdad(conjuntoA, conjuntoB):
 
 Resultado final: true
 
+---
+
 ## 4. Casos de prueba y explicación
    
 Se implementaron 7 pruebas unitarias con ScalaTest.
 Cada caso evalúa un comportamiento distinto de la función Igualdad.
 
+---
 
 ### Caso 1 — Igualdad de dos conjuntos difusos
 **Entrada:** conjuntoA, conjuntoB
@@ -99,12 +104,16 @@ Cada caso evalúa un comportamiento distinto de la función Igualdad.
 
 **Explicación:** Todos los grados son idénticos → conjuntos iguales.
 
+---
+
 ### Caso 2 — Igualdad con conjunto vacío
 **Entrada:** conjuntoA, conjuntoVacio(x) = 0.0
 
 **Resultado esperado:** false
 
 **Explicación:** En $n = 1$, $f_A(1) = 0.2 \neq 0.0$ → corte temprano.
+
+---
 
 ### Caso 3 — Conjuntos con diferentes grados
 **Entrada:** conjuntoA, conjuntoC donde $f_C(1) = 0.3 $
@@ -113,12 +122,16 @@ Cada caso evalúa un comportamiento distinto de la función Igualdad.
 
 **Explicación:** En $n = 1$, $0.2 \neq 0.3$ → retorna false inmediatamente.
 
+---
+
 ### Caso 4 — Conjuntos idénticos
 **Entrada:** conjuntoA, conjuntoA
 
 **Resultado esperado:** true
 
 **Explicación:** Propiedad reflexiva → recursión completa hasta 1001.
+
+---
 
 ### Caso 5 — Conjuntos con solapamiento parcial
 **Entrada:** conjuntoA, conjuntoD (solo comparten algunos elementos)
@@ -127,12 +140,16 @@ Cada caso evalúa un comportamiento distinto de la función Igualdad.
 
 **Explicación:** Difieren en al menos un elemento del rango [0,1000].
 
+---
+
 ### Caso 6 — Conjuntos iguales excepto en un punto
 **Entrada:** Dos conjuntos que difieren solo en $x = 500 $
 
 **Resultado esperado:** false
 
 **Explicación:** Corte en $n = 500 $ cuando detecta la diferencia.
+
+---
 
 ### Caso 7 — Conjuntos definidos por tramos
 **Entrada:** $f_A(x) = f_B(x) = 0.5$ para $0 \le x \le 1000$
@@ -141,12 +158,13 @@ Cada caso evalúa un comportamiento distinto de la función Igualdad.
 
 **Explicación:** Recorre todo el rango sin encontrar diferencias.
 
+---
+
 ## 5. Diagramas de ejecución
    
 Diagrama de flujo — función Igualdad
-```
+```mermaid
 flowchart TD
-
    A[Inicio Igualdad] --> B[Llamar auxiliar0]
    B --> C{n > 1000?}
    C -->|Sí| D[Retorna true]
@@ -159,9 +177,8 @@ flowchart TD
 
 Diagrama de secuencia — Ejemplo para conjuntos iguales
 
-```
+```mermaid
 sequenceDiagram
-
    participant Main
    participant Igualdad
    participant Auxiliar
@@ -181,6 +198,9 @@ end
 Auxiliar-->>Igualdad: true
 Igualdad-->>Main: true
 ```
+
+---
+
 
 ## 6. Estado de la pila de llamados
 
